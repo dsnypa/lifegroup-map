@@ -8,6 +8,9 @@ on:
       - 'scripts/build_map.py'
       - 'requirements.txt'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,8 +30,16 @@ jobs:
       - name: Build map
         run: python scripts/build_map.py
 
+      - name: Commit generated map
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add docs/index.html
+          git commit -m "Update generated map" || echo "No changes to commit"
+          git push
+
       - name: Upload generated map
         uses: actions/upload-artifact@v6
         with:
           name: lifegroups-map
-          path: output/lifegroups_map.html
+          path: docs/index.html
