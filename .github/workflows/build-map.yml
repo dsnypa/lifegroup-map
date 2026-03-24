@@ -27,6 +27,12 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Recreate private CSV
+        run: |
+          cat > input/lifegroups.csv <<'EOF'
+          ${{ secrets.LIFEGROUPS_CSV }}
+          EOF
+
       - name: Build map
         run: python scripts/build_map.py
 
