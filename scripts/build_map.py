@@ -118,7 +118,7 @@ def build_map(rows: list[dict], output_path: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build a LifeGroup location map from CSV coordinates.")
     parser.add_argument("--input", default="input/lifegroups.csv", help="Input CSV path")
-    parser.add_argument("--output", default="output/lifegroups_map.html", help="Output HTML path")
+    parser.add_argument("--output", default="docs/index.html", help="Output HTML path")
     args = parser.parse_args()
 
     input_path = Path(args.input)
